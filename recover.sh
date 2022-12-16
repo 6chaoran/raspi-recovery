@@ -13,7 +13,7 @@ sudo apt update
 sudo apt install -y aria2
 
 echo "continue
-dir=/var/www/downloads
+dir=/home/chaoran/Downloads
 file-allocation=falloc
 max-connection-per-server=4
 max-concurrent-downloads=2
@@ -21,8 +21,8 @@ max-overall-download-limit=0
 min-split-size=25M
 rpc-allow-origin-all=true
 rpc-secret=100200
-input-file=/var/tmp/aria2c.session
-save-session=/var/tmp/aria2c.session" > aria2.daemon
+input-file=/home/chaoran/tmp/aria2c.session
+save-session=/home/chaoran/tmp/aria2c.session" > aria2.daemon
 sudo mv aria2.daemon /etc
 
 echo "# Override or Change User and Group per your local environment
@@ -32,9 +32,9 @@ After=network.target
 
 [Service]
 Type=simple
-User=www-data
-Group=www-data
-ExecStartPre=/usr/bin/env touch /var/tmp/aria2c.session
+User=chaoran
+Group=chaoran
+ExecStartPre=/usr/bin/env touch /home/chaoran/tmp/aria2c.session
 ExecStart=/usr/bin/aria2c --console-log-level=warn --enable-rpc --rpc-listen-all --conf-path=/etc/aria2.daemon
 TimeoutStopSec=20
 Restart=on-failure
@@ -50,4 +50,6 @@ sudo mkdir --parents /var/www/html/ariang
 sudo unzip AriaNg-1.2.4-AllInOne.zip -d /var/www/html/ariang
 rm AriaNg-1.2.4-AllInOne.zip 
 
+touch /home/chaoran/tmp/aria2c.session
 sudo systemctl start aria2c.service
+sudo ln -s /home/chaoran/Downloads /var/www/html/
