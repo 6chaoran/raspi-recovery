@@ -4,7 +4,7 @@ curl -sSL https://install.pi-hole.net | bash
 
 # lighttpd
 echo enable lighttpd dir-listing
-echo 'server.dir-listing = "enable"' | sudo tee -a /etc/lighttpd/lighttpd.conf
+echo 'server.dir-listing = "enable"' | sudo tee -a /etc/lighttpd/external.conf
 sudo systemctl restart lighttpd.service
 
 # aria
